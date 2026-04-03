@@ -276,6 +276,22 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
 .hero-sns-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);}
 .sns-btn:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,0.4);}
 
+/* ===== HAMBURGER ===== */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:0.4rem;z-index:110;}
+.hamburger span{display:block;width:22px;height:2px;background:white;border-radius:2px;transition:all 0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-drawer{display:none;}
+
+/* 規約チェック */
+.terms-row{display:flex;align-items:flex-start;gap:0.6rem;margin:0.8rem 0 0.4rem;padding:0.9rem 1rem;background:rgba(31,173,168,0.05);border:1.5px solid rgba(31,173,168,0.2);border-radius:6px;}
+.terms-row input[type=checkbox]{width:18px;height:18px;flex-shrink:0;accent-color:var(--teal);margin-top:1px;cursor:pointer;}
+.terms-row label{font-size:0.82rem;color:var(--navy);line-height:1.6;cursor:pointer;}
+.terms-row label a{color:var(--teal);text-decoration:underline;}
+.terms-label{font-size:0.8rem;font-weight:700;color:var(--navy);letter-spacing:0.05em;margin-bottom:0.4rem;}
+.req-terms{display:inline-block;background:var(--coral);color:white;font-size:0.6rem;padding:0.1rem 0.4rem;border-radius:2px;margin-left:0.3rem;vertical-align:middle;}
+
 /* LINE nav button */
 .nav-line-btn{
   display:flex;align-items:center;gap:0.4rem;
@@ -361,16 +377,46 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
 }
 
 @media(max-width:700px){
-  .hero-inner{flex-direction:column;text-align:center;}
-  .hero-shisa-l,.hero-shisa-r{order:0;}
-  .hero-shisa-l{order:-1;}
-  .hero-shisa-r{order:1;}
+  /* NAV */
+  nav{padding:0 1rem;position:fixed;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-drawer{
+    display:block;position:fixed;top:60px;left:0;right:0;
+    background:rgba(14,31,58,0.98);
+    max-height:0;overflow:hidden;
+    transition:max-height 0.35s ease;
+    z-index:99;border-bottom:2px solid var(--teal);
+  }
+  .nav-drawer.open{max-height:320px;}
+  .nav-drawer ul{list-style:none;padding:0.8rem 1.5rem 1.2rem;display:flex;flex-direction:column;gap:0;}
+  .nav-drawer ul li a{
+    display:block;padding:0.75rem 0;
+    color:rgba(255,255,255,0.85);text-decoration:none;
+    font-size:0.88rem;font-weight:500;letter-spacing:0.05em;
+    border-bottom:1px solid rgba(255,255,255,0.07);
+    transition:color 0.2s;
+  }
+  .nav-drawer ul li:last-child a{border-bottom:none;}
+  .nav-drawer ul li a:hover{color:#00A1BF;}
+
+  /* HERO */
+  .hero-inner{flex-direction:column;text-align:center;gap:0.5rem;}
+  .hero-shisa-l{order:-1;transform:scale(0.7);transform-origin:center bottom;margin-bottom:-1.5rem;}
+  .hero-shisa-r{display:none;}
+  .hero-text{order:0;}
+
+  /* FORM */
   .form-grid{grid-template-columns:1fr;}
-  nav{padding:0 1rem;}
-  .nav-links{gap:0.8rem;}
-  .nav-links a{font-size:0.72rem;}
+
+  /* STAFF */
   .staff-grid{grid-template-columns:repeat(3,1fr);}
-  #chat-modal{bottom:0;right:0;width:100%;max-width:100%;border-radius:18px 18px 0 0;height:70vh;}
+
+  /* CHAT */
+  #chat-modal{bottom:0;right:0;width:100%;max-width:100%;border-radius:18px 18px 0 0;height:75vh;}
+
+  /* FOOTER SNS */
+  .sns-row{flex-wrap:wrap;}
 }
 </style>
 </head>
@@ -398,11 +444,23 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
     <li><a href="#qa">よくある質問</a></li>
     <li><a href="#contact">お問い合わせ</a></li>
   </ul>
-  <a href="https://line.me/R/ti/p/@example" target="_blank" rel="noopener noreferrer" class="nav-line-btn" onclick="window.open('https://line.me/R/ti/p/@example','_blank');return false;">
+  <a href="https://line.me/ti/p/mz-IWioyBs" target="_blank" rel="noopener noreferrer" class="nav-line-btn" onclick="window.open('https://line.me/ti/p/mz-IWioyBs','_blank');return false;">
     <svg width="14" height="14" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="8" fill="white"/><path d="M20 6C12.27 6 6 11.17 6 17.5c0 5.66 5.01 10.4 11.79 11.33.46.1 1.08.3 1.24.7.14.36.09.92.04 1.28l-.2 1.2c-.06.36-.28 1.41 1.24.77 1.52-.64 8.2-4.83 11.19-8.26C33.4 22.13 34 19.9 34 17.5 34 11.17 27.73 6 20 6z" fill="#06C755"/><path d="M28.3 21.1h-4.1a.3.3 0 01-.3-.3v-6.4c0-.17.13-.3.3-.3h4.1c.17 0 .3.13.3.3v1.03c0 .17-.13.3-.3.3h-2.77v1.08h2.77c.17 0 .3.13.3.3v1.03c0 .17-.13.3-.3.3h-2.77v1.08h2.77c.17 0 .3.13.3.3v1.03c0 .17-.13.3-.3.3zm-5.6 0h-1.03a.3.3 0 01-.3-.3v-6.4c0-.17.13-.3.3-.3h1.03c.17 0 .3.13.3.3v6.4c0 .17-.13.3-.3.3zm-2.3 0h-4.1a.3.3 0 01-.3-.3v-6.4c0-.17.13-.3.3-.3h1.03c.17 0 .3.13.3.3v5.07h2.77c.17 0 .3.13.3.3v1.03c0 .17-.13.3-.3.3zm-5.8 0h-1.03a.3.3 0 01-.3-.3v-6.4c0-.17.13-.3.3-.3H14.6c.17 0 .3.13.3.3v6.4c0 .17-.13.3-.3.3z" fill="white"/></svg>
     LINE相談
   </a>
+  <button class="hamburger" id="hamburger" aria-label="メニュー" onclick="toggleDrawer()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-drawer" id="navDrawer">
+  <ul>
+    <li><a href="#company" onclick="closeDrawer()">会社概要</a></li>
+    <li><a href="#staff" onclick="closeDrawer()">スタッフ</a></li>
+    <li><a href="#flow" onclick="closeDrawer()">契約の流れ</a></li>
+    <li><a href="#qa" onclick="closeDrawer()">よくある質問</a></li>
+    <li><a href="#contact" onclick="closeDrawer()">お問い合わせ</a></li>
+  </ul>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -612,10 +670,6 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
       <tr>
         <th>所在地</th>
         <td>大阪府大阪市大正区三軒家東1-4-13-4B</td>
-      </tr>
-      <tr>
-        <th>活動エリア</th>
-        <td><span class="access-tag">大阪市内全域</span>賃貸・売買ともに対応しています</td>
       </tr>
       <tr>
         <th>TEL</th>
@@ -838,7 +892,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
 <section id="access">
   <div class="section-inner">
     <div class="section-label reveal">ACCESS</div>
-    <h2 class="section-title reveal">所在地・活動エリア</h2>
+    <h2 class="section-title reveal">所在地</h2>
     <div class="access-area reveal">
       <div class="access-title">🌊 うみかぜ不動産事務所</div>
       <div class="access-item">
@@ -848,10 +902,6 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
       <div class="access-item">
         <span class="access-icon">📞</span>
         <a href="tel:09041911874" style="color:var(--teal);font-weight:700;text-decoration:none;">090-4191-1874</a>
-      </div>
-      <div class="access-item">
-        <span class="access-icon">🗺️</span>
-        <span><span class="access-tag">活動エリア</span><strong>大阪市内全域</strong>対応しています。ご自宅への訪問もお気軽にご相談ください。</span>
       </div>
     </div>
   </div>
@@ -906,6 +956,15 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
           <textarea class="form-textarea" placeholder="ご質問・ご要望をご記入ください" id="message"></textarea>
         </div>
       </div>
+      <div class="form-group full" style="margin-top:0.4rem;">
+        <div class="terms-label">規約<span class="req-terms">必須</span></div>
+        <div class="terms-row">
+          <input type="checkbox" id="terms" name="terms">
+          <label for="terms">
+            <a href="#privacy">プライバシーポリシー</a>をお読みいただき、利用規約に同意しました。
+          </label>
+        </div>
+      </div>
       <button class="form-submit" onclick="submitForm()">送信する</button>
       <div class="success-msg" id="successMsg">✅ お問い合わせを受け付けました。担当者よりご連絡いたします。</div>
     </div>
@@ -925,7 +984,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
       個人情報は、収集目的を明示した上で、ウェブフォームや電子メールから、情報提供者の意思による情報提供により収集します。アクセス情報は、アクセス解析および広告配信に利用する目的で、本ホームページを表示するすべての利用者の情報を収集します。
 
       <div class="privacy-h">利用者情報の利用および提供</div>
-      個人情報は、情報提供者の承諾を得ている場合、あるいは法律の定めがある場合を除き、目的以外に利用せず、また第三者への提供は行いません。アクセス情報は、本ホームページのシステムを運営する株式会社ビーシャープが提携する広告配信会社に提供する場合があります。広告配信会社は、利用者の興味に応じた商品やサービスの広告を表示するため、本ホームページや他のホームページへのアクセス情報を使用することがあります。
+      個人情報は、情報提供者の承諾を得ている場合、あるいは法律の定めがある場合を除き、目的以外に利用せず、また第三者への提供は行いません。アクセス情報は、サービス改善を目的としたアクセス解析にのみ使用し、第三者への提供は行いません。
 
       <div class="privacy-h">個人情報の管理</div>
       個人情報は、漏えいや改ざんのないよう厳重に管理し、必要がなくなった場合は速やかに消去します。
@@ -933,7 +992,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
       <div class="privacy-h">お問い合わせ窓口</div>
       うみかぜ不動産事務所　TEL: 090-4191-1874<br>
       大阪府大阪市大正区三軒家東1-4-13-4B<br><br>
-      <span style="font-size:0.75rem;color:rgba(255,255,255,0.3);">制定日：2024年　うみかぜ不動産事務所</span>
+      <span style="font-size:0.75rem;color:rgba(255,255,255,0.3);">制定日：2024年9月　うみかぜ不動産事務所</span>
     </div>
   </div>
 </section>
@@ -948,15 +1007,15 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
     <text x="240" y="16" font-family="'Zen Kaku Gothic New',sans-serif" font-size="12" fill="rgba(255,255,255,0.5)" text-anchor="middle">大阪市大正区三軒家東1-4-13-4B　｜　TEL: 090-4191-1874</text>
   </svg>
   <div class="sns-row">
-    <a href="https://line.me/R/ti/p/@umikaze" target="_blank" rel="noopener" class="sns-btn sns-btn-line">
+    <a href="https://line.me/ti/p/mz-IWioyBs" target="_blank" rel="noopener" class="sns-btn sns-btn-line">
       <svg width="16" height="16" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 3C10.61 3 3 9.72 3 17.97c0 7.46 6.6 13.7 15.54 14.9.6.13 1.43.4 1.64.93.18.47.12 1.21.06 1.69l-.26 1.58c-.08.47-.37 1.86 1.63 1.01C23.61 37.04 33 30.49 37 25.5 39.38 22.68 40 19.43 40 17.97 40 9.72 29.39 3 20 3z" fill="white"/><path d="M29.3 22.1h-4.1a.3.3 0 01-.3-.3v-6.4c0-.17.13-.3.3-.3h4.1c.17 0 .3.13.3.3v1.03c0 .17-.13.3-.3.3h-2.77v1.08h2.77c.17 0 .3.13.3.3v1.03c0 .17-.13.3-.3.3h-2.77v1.08h2.77c.17 0 .3.13.3.3v1.03c0 .17-.13.3-.3.3zm-5.6 0h-1.03a.3.3 0 01-.3-.3v-6.4c0-.17.13-.3.3-.3h1.03c.17 0 .3.13.3.3v6.4c0 .17-.13.3-.3.3zm-2.3 0h-4.1a.3.3 0 01-.3-.3v-6.4c0-.17.13-.3.3-.3h1.03c.17 0 .3.13.3.3v5.07h2.77c.17 0 .3.13.3.3v1.03c0 .17-.13.3-.3.3zm-5.8 0h-1.03a.3.3 0 01-.3-.3v-6.4c0-.17.13-.3.3-.3h1.03c.17 0 .3.13.3.3v6.4c0 .17-.13.3-.3.3z" fill="#06C755"/></svg>
       LINE相談
     </a>
-    <a href="https://x.com/umikazehudousan" target="_blank" rel="noopener" class="sns-btn sns-btn-x">
     <a href="https://www.instagram.com/umikazehudousan/" target="_blank" rel="noopener" class="sns-btn sns-btn-instagram">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
       Instagram
     </a>
+    <a href="https://x.com/umikazehudousan" target="_blank" rel="noopener" class="sns-btn sns-btn-x">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.254 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       X (Twitter)
     </a>
@@ -964,7 +1023,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
   <div style="font-size:0.72rem;opacity:0.3;margin-bottom:0.5rem;">
     <a href="#privacy" style="color:inherit;text-decoration:underline;">プライバシーポリシー</a>
   </div>
-  <p style="font-size:0.68rem;opacity:0.35;">© 2024 うみかぜ不動産事務所. All rights reserved.</p>
+  <p style="font-size:0.68rem;opacity:0.35;">© 2025 うみかぜ不動産事務所. All rights reserved.</p>
 </footer>
 
 <!-- チャットモーダル（スタッフカードから起動） -->
@@ -1004,6 +1063,18 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;back
 </div>
 
 <script>
+// ===== ハンバーガーメニュー =====
+function toggleDrawer(){
+  const h=document.getElementById('hamburger');
+  const d=document.getElementById('navDrawer');
+  h.classList.toggle('open');
+  d.classList.toggle('open');
+}
+function closeDrawer(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('navDrawer').classList.remove('open');
+}
+
 // ===== ザッパーン波アニメ =====
 (function(){
   const canvas = document.getElementById('waveCanvas');
@@ -1101,7 +1172,9 @@ function submitForm(){
   const n=document.getElementById('name').value;
   const em=document.getElementById('email').value;
   const msg=document.getElementById('message').value;
+  const terms=document.getElementById('terms').checked;
   if(!n||!em||!msg){alert('必須項目をご入力ください。');return;}
+  if(!terms){alert('利用規約への同意が必要です。');return;}
   document.getElementById('successMsg').style.display='block';
   const btn=document.querySelector('.form-submit');
   btn.disabled=true;btn.style.opacity='0.5';
